@@ -43,8 +43,8 @@ app.Login = (function () {
         };
         
         var show = function () {
-            $loginUsername.val('');
-            $loginPassword.val('');
+            $loginUsername.val('burke');
+            $loginPassword.val('password');
         };
         
         var getYear = function () {

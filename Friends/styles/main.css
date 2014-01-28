@@ -12,6 +12,8 @@
   clear: both;
 }
 
+
+
 .km-flat .km-loader,
 .km-flat .km-rowinsert,
 .km-flat .km-state-active,
@@ -181,6 +183,29 @@
     background-image: url(images/icon-adsf.png);
 }
 
+#friendsApp .btn-frenemy {
+    background-image: url(images/icon_thumbs-down-white.png);
+}
+
+#friendsApp .btn-friend {
+ 	background-image: url(images/icon_thumbs-up-white.png);
+}
+
+#details .btn {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    height: 45px;
+    width: 45px;
+    position: absolute;
+    right: 10px;
+    margin-top: -22px;
+    float: right;
+}
+
+#details .item {
+    height: 60px;
+}
+
 #friendsApp .km-header .nav-button {
     display: inline-block;
     width: 2em;
@@ -214,6 +239,10 @@
 
 #friendsApp.km-flat.km-on-ios.km-black-translucent-status-bar .km-header {
     min-height: 20px;
+    background-color: #2d3e50;
+}
+
+#friendsApp .km-tabstrip {
     background-color: #2d3e50;
 }
 

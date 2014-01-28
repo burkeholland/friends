@@ -5,7 +5,7 @@
 var appSettings = {
     
     everlive: {
-        apiKey: '1Rqr1816ukgvc9ya', // Put your Everlive API key here
+        apiKey: '4l35ytLsvk393Ik1', // Put your Everlive API key here
         scheme: 'http'
     },
     
@@ -30,8 +30,8 @@ var appSettings = {
     },
     
     adfs: {
-        adfsRealm: '$ADFS_REALM$', // Put your ADFS Realm here
-        adfsEndpoint: '$ADFS_ENDPOINT$' // Put your ADFS Endpoint here
+        adfsRealm: 'https://api.everlive.com/v1/E8tMoGEClJf0xmvV', // Put your ADFS Realm here
+        adfsEndpoint: 'https://fs.telerik.com/federationmetadata/2007-06/federationmetadata.xml' // Put your ADFS Endpoint here
     },
     
     messages: {

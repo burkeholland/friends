@@ -10,7 +10,13 @@ app.Users = (function () {
     var usersModel = (function () {
         
         var currentUser = kendo.observable({ data: null });
-        var usersData;
+        var usersData = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "Id"
+                }
+            }
+        });
         
         // Retrieve current user and all users data from Everlive
         var loadUsers = function () {
@@ -26,9 +32,14 @@ app.Users = (function () {
                 // Get the data about all registered users
                 return app.everlive.Users.get();
             })
-            .then(function (data) {
+            .then(function (data) {          
+                $.each(data.result, function() {
+                    this.PictureUrl = app.helper.resolveProfilePictureUrl(this.Picture);
+                    this.isFrenemy = this.isFrenemy || false;
+                });
                 
-                usersData = new kendo.data.ObservableArray(data.result);
+                usersData.data(data.result);
+				usersData.filter({ field: "isFrenemy", operator: "eq", value: false });
             })
             .then(null,
                   function (err) {
@@ -37,12 +48,35 @@ app.Users = (function () {
             );
         };
         
+        var filter = function() {
+            var exp = { field: "isFrenemy", operator: "eq", value: this.selectedIndex ? true : false };
+            usersData.filter(exp);
+        }
+        
+        var update = function(e) {
+            var enemy = usersData.get(e.sender.element.data("id"));
+            var user = currentUser.data.Id;
+            
+            var frenemies = app.everlive.data('Frenemies');
+            
+            var frenemy = frenemies.create({ "User": user.data.Id, "Enemy": enemy.Id },
+				function(data) {
+                    usersData.remove(enemy);
+                },
+				function(error) {
+                    console.log(JSON.stringify(data));
+                }
+			);
+        }
+        
         return {
             load: loadUsers,
             users: function () {
                 return usersData;
             },
-            currentUser: currentUser
+            currentUser: currentUser,
+            filter: filter,
+            update: update
         };
         
     }());

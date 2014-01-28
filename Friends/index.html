@@ -17,6 +17,8 @@
         <script src="scripts/app/activities.js" type="text/javascript"></script>
         <script src="scripts/app/activity.js" type="text/javascript"></script>
         <script src="scripts/app/add-activity.js" type="text/javascript"></script>
+        <script src="scripts/app/frenemies.js"></script>
+        <script src="scripts/app/push.js"></script>
         
         <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,800" rel="stylesheet" type="text/css" />
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
@@ -24,8 +26,20 @@
     </head>
     <body id="friendsApp">
         <section data-role="layout" data-id="default">
-            <!--View content will render here-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title">NavBar</span>
+            </div>
+        </div>    
+            
+            <div data-role="footer">
+                <div data-role="tabstrip">
+                    <a data-icon="home" href="views/activitiesView.html">Feed</a>
+                    <a data-role="button" data-icon="contacts" href="#details">Friends</a>
+                </div>
+            </div>
         </section>
+        
         <!--WELCOME VIEW -->
         <div data-role="view" id="welcome" data-layout="default" class="welcome-scrn form-view" data-model="app.Login" data-init="app.Login.init" data-show="app.Login.show">
             <header data-role="header"></header>
@@ -64,5 +78,35 @@
 
             <div data-role="footer"><p>?? <span data-bind="text: getYear"></span> Telerik Inc.</p></div>
         </div>
+        
+        <!-- Details View -->
+        <div id="details" data-role="view" data-layout="default" data-title="Friends" class="activities-view">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <ul data-role="buttongroup" data-index="0" data-select="app.Frenemies.filter">
+                        <li>
+                            Friends
+                        </li>
+                        <li id="frenemies-target">
+                            Frenemies
+                        </li>
+                    </ul>
+				</div>
+            </div>
+            <ul data-role="listview" data-style="inset" data-source="app.Frenemies.users" data-template="details-template"></ul>
+        </div>
+        
+        <script type="text/x-kendo-template" id="details-template">
+        	<div class="item">
+                <div class="user-avatar">
+                    <img src="${PictureUrl}"" alt="styles/images/avatar.png" />
+                </div>
+                <div class="activity-content">
+                    <h2 class="person-name">${DisplayName}</h2>
+                </div>
+                <a data-role="button" class="btn btn-frenemy" data-click="app.Frenemies.frenemize" data-id="${Id}"></a>
+            </div>
+        </script>
+        
     </body>
 </html>

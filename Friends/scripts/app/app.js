@@ -68,6 +68,9 @@ var app = (function (win) {
         if (analytics.isAnalytics()) {
             analytics.Start();
         }
+        
+    	app.Push.init();
+        // app.Login.login();
     };
 
     // Handle "deviceready" event
